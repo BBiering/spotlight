@@ -186,7 +186,7 @@ class ImplicitSequenceModel(object):
         else:
             item_id_max = item_ids.max()
 
-        if item_id_max >= self._num_items:
+        if item_id_max > self._num_items:
             raise ValueError('Maximum item id greater '
                              'than number of items in model.')
 
@@ -262,6 +262,8 @@ class ImplicitSequenceModel(object):
             if np.isnan(epoch_loss) or epoch_loss == 0.0:
                 raise ValueError('Degenerate epoch loss: {}'
                                  .format(epoch_loss))
+        
+        return epoch_loss
 
     def _get_negative_prediction(self, shape, user_representation):
 
