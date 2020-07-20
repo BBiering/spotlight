@@ -49,7 +49,8 @@ def mrr_score(model, test, train=None):
         if train is not None:
             predictions[train[user_id].indices] = FLOAT_MAX
 
-        mrr = (1.0 / st.rankdata(predictions)[row.indices]).mean()
+        # mrr = (1.0 / st.rankdata(predictions)[row.indices]).mean()
+        mrr = (1.0 / st.rankdata(predictions)[row.indices]).min()  # see issue #91
 
         mrrs.append(mrr)
 

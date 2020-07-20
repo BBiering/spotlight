@@ -165,7 +165,7 @@ class ImplicitFactorizationModel(object):
         else:
             user_id_max = user_ids.max()
 
-        if user_id_max >= self._num_users:
+        if user_id_max > self._num_users:
             raise ValueError('Maximum user id greater '
                              'than number of users in model.')
 
@@ -177,7 +177,7 @@ class ImplicitFactorizationModel(object):
         else:
             item_id_max = item_ids.max()
 
-        if item_id_max >= self._num_items:
+        if item_id_max > self._num_items:
             raise ValueError('Maximum item id greater '
                              'than number of items in model.')
 
@@ -250,6 +250,8 @@ class ImplicitFactorizationModel(object):
             if np.isnan(epoch_loss) or epoch_loss == 0.0:
                 raise ValueError('Degenerate epoch loss: {}'
                                  .format(epoch_loss))
+            
+            return epoch_loss
 
     def _get_negative_prediction(self, user_ids):
 
