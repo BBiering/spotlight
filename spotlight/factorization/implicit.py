@@ -252,7 +252,7 @@ class ImplicitFactorizationModel(object):
                 raise ValueError('Degenerate epoch loss: {}'
                                  .format(epoch_loss))
                                  
-        return epoch_loss, self._representation.item_embeddings
+        return epoch_loss, self._net.item_embeddings
 
     def _get_negative_prediction(self, user_ids):
 
