@@ -141,11 +141,16 @@ class ImplicitFactorizationModel(object):
             )
 
         if self._optimizer_func is None:
-            self._optimizer = optim.Adam(
-                self._net.parameters(),
-                weight_decay=self._l2,
-                lr=self._learning_rate
-            )
+            if self._sparse:
+                self._optimizer = optim.SparseAdam(
+                    self._net.parameters()
+                )
+            else:
+                self._optimizer = optim.Adam(
+                    self._net.parameters(),
+                    weight_decay=self._l2,
+                    lr=self._learning_rate
+                )
         else:
             self._optimizer = self._optimizer_func(self._net.parameters())
 
@@ -184,17 +189,13 @@ class ImplicitFactorizationModel(object):
     def fit(self, interactions, verbose=False):
         """
         Fit the model.
-
         When called repeatedly, model fitting will resume from
         the point at which training stopped in the previous fit
         call.
-
         Parameters
         ----------
-
         interactions: :class:`spotlight.interactions.Interactions`
             The input dataset.
-
         verbose: bool
             Output additional information about current epoch and loss.
         """
@@ -250,8 +251,8 @@ class ImplicitFactorizationModel(object):
             if np.isnan(epoch_loss) or epoch_loss == 0.0:
                 raise ValueError('Degenerate epoch loss: {}'
                                  .format(epoch_loss))
-            
-            return epoch_loss
+                                 
+        return epoch_loss, self._representation.item_embeddings
 
     def _get_negative_prediction(self, user_ids):
 

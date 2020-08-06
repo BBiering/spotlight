@@ -206,7 +206,7 @@ def precision_recall_score(model, test, train=None, k=10):
         predictions = predictions.argsort()
 
         targets = row.indices
-
+        
         user_precision, user_recall = zip(*[
             _get_precision_recall(predictions, targets, x)
             for x in k

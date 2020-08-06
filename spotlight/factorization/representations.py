@@ -76,8 +76,6 @@ class BilinearNet(nn.Module):
         predictions: tensor
             Tensor of predictions.
         """
-        print(f'user ids: {user_ids}')
-        print(f'user_embeddings {self.user_embeddings}')
         
         user_embedding = self.user_embeddings(user_ids)
         item_embedding = self.item_embeddings(item_ids)

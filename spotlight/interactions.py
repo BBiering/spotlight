@@ -126,19 +126,19 @@ class Interactions(object):
 
     def _check(self):
 
-        if self.user_ids.max() > self.num_users:
-            raise ValueError('Maximum user id greater '
-                             'than declared number of users.')
-        # if self.item_ids.max() >= self.num_items:
-        #     raise ValueError('Maximum item id greater '
-        #                      'than declared number of items.')
+        # if self.user_ids.max() > self.num_users:
+        #     raise ValueError('Maximum user id greater '
+        #                      'than declared number of users.')
+        if self.item_ids.max() >= self.num_items:
+            raise ValueError('Maximum item id greater '
+                             'than declared number of items.')
 
-        if self.user_ids.max() > self.num_users:
-            raise ValueError('Maximum user id greater '
-                             'than declared number of users.')
-        # if self.item_ids.max() >= self.num_items:
-        #     raise ValueError('Maximum item id greater '
-        #                      'than declared number of items.')
+        # if self.user_ids.max() > self.num_users:
+        #     raise ValueError('Maximum user id greater '
+        #                      'than declared number of users.')
+        if self.item_ids.max() >= self.num_items:
+            raise ValueError('Maximum item id greater '
+                             'than declared number of items.')
 
         num_interactions = len(self.user_ids)
 
